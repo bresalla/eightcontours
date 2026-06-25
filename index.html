@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Освобождение Души</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:wght@300;400;600&family=JetBrains+Mono:wght@300&display=swap');
+
+  :root {
+    --ink: #1a1410;
+    --parchment: #f7f3ec;
+    --gold: #c4933f;
+    --gold-dim: #8a6525;
+    --rust: #8b3a2a;
+    --blue-deep: #1e2d4a;
+    --divider: #c4933f44;
+    --c1: #7a3b2e;
+    --c2: #6b4c1e;
+    --c3: #3d5a2e;
+    --c4: #2e4a5a;
+    --c5: #3a2e6b;
+    --c6: #4a1e6b;
+    --c7: #6b1e5a;
+    --c8: #1a1410;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.6rem;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold-dim);
+  }
+
+  .header-subtitle {
+    font-size: 1rem;
+    color: #5a4e3a;
+    font-style: italic;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 28px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  /* Ladder */
+  .ladder {
+    margin-bottom: 64px;
+  }
+
+  .rung {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0 20px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+
+  .rung-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rung-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    background: var(--parchment);
+    flex-shrink: 0;
+    margin-top: 6px;
+    z-index: 1;
+  }
+
+  .rung-connector {
+    width: 2px;
+    flex: 1;
+    background: var(--divider);
+    margin-top: 2px;
+  }
+
+  .rung:last-child .rung-connector {
+    display: none;
+  }
+
+  .rung-body {
+    padding-bottom: 28px;
+  }
+
+  .rung-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .rung-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
+  .rung-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .rung-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+    opacity: 0.7;
+  }
+
+  .rung-text {
+    font-size: 0.95rem;
+    color: #3a3028;
+    line-height: 1.65;
+  }
+
+  .rung-quote {
+    font-style: italic;
+    color: var(--gold-dim);
+    margin-top: 6px;
+    font-size: 0.9rem;
+  }
+
+  /* Suffering rungs */
+  .rung-1 .rung-dot { color: var(--c1); }
+  .rung-2 .rung-dot { color: var(--c2); }
+  .rung-3 .rung-dot { color: var(--c3); }
+  .rung-4 .rung-dot { color: var(--c4); }
+  .rung-5 .rung-dot { color: var(--c5); border-width: 2px; background: #e8e0f0; }
+  .rung-6 .rung-dot { color: var(--c6); background: #ede0f7; }
+  .rung-7 .rung-dot { color: var(--c7); background: #f7e0f0; }
+  .rung-8 .rung-dot { color: var(--c8); background: var(--ink); width: 12px; height: 12px; margin-top: 5px; }
+
+  .rung-1 .rung-title { color: var(--c1); }
+  .rung-2 .rung-title { color: var(--c2); }
+  .rung-3 .rung-title { color: var(--c3); }
+  .rung-4 .rung-title { color: var(--c4); }
+  .rung-5 .rung-title { color: var(--c5); }
+  .rung-6 .rung-title { color: var(--c6); }
+  .rung-7 .rung-title { color: var(--c7); }
+  .rung-8 .rung-title { color: var(--c8); }
+
+  .rung-1 .tag { color: var(--c1); }
+  .rung-2 .tag { color: var(--c2); }
+  .rung-3 .tag { color: var(--c3); }
+  .rung-4 .tag { color: var(--c4); }
+  .rung-5 .tag { color: var(--c5); }
+  .rung-6 .tag { color: var(--c6); }
+  .rung-7 .tag { color: var(--c7); }
+  .rung-8 .tag { color: var(--c8); }
+
+  /* Divider between suffering and liberation */
+  .threshold {
+    text-align: center;
+    margin: 8px 0 32px;
+    position: relative;
+  }
+
+  .threshold::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .threshold-label {
+    display: inline-block;
+    background: var(--parchment);
+    padding: 4px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    position: relative;
+  }
+
+  /* Traditions table */
+  .traditions {
+    margin-bottom: 64px;
+  }
+
+  .trad-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .trad-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .trad-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e8e0d0;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .trad-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .trad-table .c-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-dim);
+    white-space: nowrap;
+  }
+
+  .trad-table .c-cause {
+    font-style: italic;
+    color: #5a4e3a;
+  }
+
+  /* Key insight boxes */
+  .insights {
+    margin-bottom: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .insight-box {
+    border: 1px solid var(--divider);
+    padding: 20px;
+    position: relative;
+  }
+
+  .insight-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+
+  .insight-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .insight-text {
+    font-size: 0.88rem;
+    color: #3a3028;
+    line-height: 1.6;
+  }
+
+  /* Footer quote */
+  .closing {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--divider);
+  }
+
+  .closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-dim);
+    max-width: 480px;
+    margin: 0 auto 12px;
+    line-height: 1.5;
+  }
+
+  .closing-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #8a7a62;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 60px; }
+    .header h1 { font-size: 2rem; }
+    .insights { grid-template-columns: 1fr; }
+    .trad-table { font-size: 0.8rem; }
+    .trad-table th, .trad-table td { padding: 7px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header-eyebrow">Синтез · Неоплатонизм · Лири · Христианская мистика</div>
+    <h1>Освобождение Души<br>от <em>страданий</em></h1>
+    <p class="header-subtitle">Восхождение по контурам Лири через аристотелевскую причинность — и умное делание как путь</p>
+  </header>
+
+  <!-- Ladder -->
+  <div class="ladder">
+    <div class="section-title">Лестница · Страдание и освобождение</div>
+
+    <!-- Контур 1 -->
+    <div class="rung rung-1">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·1</span>
+          <span class="rung-title">Страдание тела</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Материальная причина</span>
+          <span class="tag">дуккха-дуккха</span>
+          <span class="tag">Борьба с телом</span>
+        </div>
+        <div class="rung-text">
+          Боль, голод, холод, болезнь. Душа полностью захвачена материей. Страдание приходит из самого вещества существования — тело как тюрьма.
+        </div>
+        <div class="rung-quote">«Мне плохо здесь и сейчас»</div>
+      </div>
+    </div>
+
+    <!-- Контур 2 -->
+    <div class="rung rung-2">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·2</span>
+          <span class="rung-title">Страдание от последствий</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Действующая причина</span>
+          <span class="tag">випаринама-дуккха</span>
+          <span class="tag">Борьба со страстями</span>
+        </div>
+        <div class="rung-text">
+          Угроза, агрессия, страх результата. Душа захвачена действующими причинами — страсти как реакции на внешнее. Иоанн Лествичник: ступени 8–17, борьба с гневом, похотью, унынием.
+        </div>
+        <div class="rung-quote">«Если не сделаю — будет плохо»</div>
+      </div>
+    </div>
+
+    <!-- Контур 3 -->
+    <div class="rung rung-3">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·3</span>
+          <span class="rung-title">Страдание от законов</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Формальная причина</span>
+          <span class="tag">санкхара-дуккха</span>
+          <span class="tag">Послушание → выход из правил</span>
+        </div>
+        <div class="rung-text">
+          Правила, роли, социальные определения. Мир формальных структур — Душа страдает от несоответствия образцу. Экхарт: выход из мира образов, Abgeschiedenheit.
+        </div>
+        <div class="rung-quote">«Я не соответствую тому, чем должен быть»</div>
+      </div>
+    </div>
+
+    <!-- Контур 4 -->
+    <div class="rung rung-4">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·4</span>
+          <span class="rung-title">Страдание от миссии</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Целевая причина</span>
+          <span class="tag">санкхара-дуккха</span>
+          <span class="tag">Отречение от мира</span>
+        </div>
+        <div class="rung-text">
+          Долг, смысл, телос. «Построить дом, родить детей, оставить след» — само существование внутри целевой структуры давит. Экхарт: Gelassenheit — отпускание воли как условие перехода.
+        </div>
+        <div class="rung-quote">«Я должен стать тем, кем обязан стать»</div>
+      </div>
+    </div>
+
+    <div class="threshold">
+      <span class="threshold-label">Граница · Воля кончается · Вертикальная причинность начинается</span>
+    </div>
+
+    <!-- Контур 5 -->
+    <div class="rung rung-5">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·5</span>
+          <span class="rung-title">Освобождение от тела</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Вертикальная причинность</span>
+          <span class="tag">Исихия</span>
+          <span class="tag">Самадхи</span>
+        </div>
+        <div class="rung-text">
+          Тело перестаёт быть источником страдания. Душа поднимается над материальной причиной — не через усилие, а через рецептивность. Иоанн: ступени 18–26, безмолвие тела.
+        </div>
+        <div class="rung-quote">Воображение сильнее воли — образ как σύμβολον</div>
+      </div>
+    </div>
+
+    <!-- Контур 6 -->
+    <div class="rung rung-6">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·6</span>
+          <span class="rung-title">Подчинение высшему порядку</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Фаворский свет</span>
+          <span class="tag">Умная молитва</span>
+          <span class="tag">Энергии Бога</span>
+        </div>
+        <div class="rung-text">
+          Освобождение от действующих необходимостей. Палама: энергии Бога нисходят в очищенную Душу. Исихаст не поднимается к Богу усилием — он становится прозрачным для нисхождения. Умное делание как метод.
+        </div>
+        <div class="rung-quote">Бог приходит в пустоту, не в усилие</div>
+      </div>
+    </div>
+
+    <!-- Контур 7 -->
+    <div class="rung rung-7">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·7</span>
+          <span class="rung-title">Возвращение в Нус</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Освобождение от форм</span>
+          <span class="tag">Geburt Gottes</span>
+          <span class="tag">Праджня</span>
+        </div>
+        <div class="rung-text">
+          Мир без категорий и определений. Экхарт: Geburt Gottes in der Seele — Бог рождается внутри Души когда она достаточно пуста. Форма исчезает — остаётся не ничто, а Нус до форм. Сердечная Сутра: «форма есть пустота».
+        </div>
+        <div class="rung-quote">Нет больше «я должен соответствовать»</div>
+      </div>
+    </div>
+
+    <!-- Контур 8 -->
+    <div class="rung rung-8">
+      <div class="rung-line">
+        <div class="rung-dot"></div>
+        <div class="rung-connector"></div>
+      </div>
+      <div class="rung-body">
+        <div class="rung-header">
+          <span class="rung-number">К·8</span>
+          <span class="rung-title">Возвращение в Единое</span>
+        </div>
+        <div class="rung-tags">
+          <span class="tag">Grunt · Экхарт</span>
+          <span class="tag">Ниббана</span>
+          <span class="tag">ὑπερπλήρωμα</span>
+        </div>
+        <div class="rung-text">
+          Нет больше «для чего» — просто есть. Экхарт: Grunt, основание Души где она и Бог неразличимы. Плотин: не уход, а возвращение домой — переполненность как природа Единого. Буддизм: угасание всей обусловленности.
+        </div>
+        <div class="rung-quote">Ниббана и Единое: одна граница, описанная с разных сторон</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Traditions table -->
+  <div class="traditions">
+    <div class="section-title">Традиции · Сравнительная таблица</div>
+    <table class="trad-table">
+      <thead>
+        <tr>
+          <th>Контур</th>
+          <th>Причина</th>
+          <th>Буддизм</th>
+          <th>Лествица</th>
+          <th>Экхарт / Палама</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="c-num">К·1</td>
+          <td class="c-cause">Материальная</td>
+          <td>дуккха-дуккха</td>
+          <td>Борьба с телом</td>
+          <td>Abgeschiedenheit</td>
+        </tr>
+        <tr>
+          <td class="c-num">К·2</td>
+          <td class="c-cause">Действующая</td>
+          <td>випаринама-дуккха</td>
+          <td>Борьба со страстями</td>
+          <td>Отпускание реакций</td>
+        </tr>
+        <tr>
+          <td class="c-num">К·3</td>
+          <td class="c-cause">Формальная</td>
+          <td>санкхара-дуккха</td>
+          <td>Послушание</td>
+          <td>Выход из образов</td>
+        </tr>
+        <tr>
+          <td class="c-num">К·4</td>
+          <td class="c-cause">Целевая</td>
+          <td>санкхара-дуккха</td>
+          <td>Отречение от мира</td>
+          <td>Gelassenheit</td>
+        </tr>
+        <tr>
+          <td class="c-num">К·5–6</td>
+          <td class="c-cause">Вертикальная ↓</td>
+          <td>Самадхи</td>
+          <td>Исихия, безмолвие</td>
+          <td>Фаворский свет · Умная молитва</td>
+        </tr>
+        <tr>
+          <td class="c-num">К·7</td>
+          <td class="c-cause">Нус</td>
+          <td>Праджня</td>
+          <td>Бесстрастие, любовь</td>
+          <td>Geburt Gottes in der Seele</td>
+        </tr>
+        <tr>
+          <td class="c-num">К·8</td>
+          <td class="c-cause">Единое</td>
+          <td>Ниббана</td>
+          <td>—</td>
+          <td>Grunt · сущность Бога</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Key insights -->
+  <div class="section-title">Ключевые узлы</div>
+  <div class="insights">
+    <div class="insight-box">
+      <div class="insight-title">Граница 4 → 5: конец воли</div>
+      <div class="insight-text">Воля принадлежит уровню Души — она горизонтальна. Чем сильнее усилие на переходе 4→5, тем дальше освобождение. Gelassenheit у Экхарта, отпускание в гипнозе, Иисусова молитва — разные имена одного механизма: рецептивность вместо действия.</div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">Нисхождение, не восхождение</div>
+      <div class="insight-text">На контурах 5–8 Душа не поднимается к Богу усилием — Бог нисходит в очищенную Душу. Палама: энергии Бога реально достижимы. Экхарт: «Бог ненавидит пустоту» — немедленно заполняет её Собой. Вертикальная причинность идёт сверху вниз.</div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">Умное делание как метод</div>
+      <div class="insight-text">Исихастская практика — непрерывная умная молитва — это технически то же что самадхи: постепенное освобождение от захваченности действующими и формальными причинами, до полной прозрачности для вертикального нисхождения.</div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">Ниббана vs Единое</div>
+      <div class="insight-text">Будда: угасание обусловленности — пустота как финал. Плотин и Экхарт: пустота не финал, а условие — Единое есть ὑπερπλήρωμα, переполненность. Два описания одной границы: апофатически (чего нет) и катафатически (что есть).</div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <div class="closing-quote">«Бог приходит в пустоту. Не в усилие. Пустота — не финал, а условие наполнения.»</div>
+    <div class="closing-attr">Майстер Экхарт · Контур 6 · Вертикальная причинность</div>
+  </div>
+
+</div>
+</body>
+</html>
